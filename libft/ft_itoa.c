@@ -52,7 +52,6 @@ static char		*ft_return(int n)
 		{
 			str[size] = n % 10 + '0';
 			n = n / 10;
-			size--;
 		}
 	}
 	return (str);
