@@ -55,6 +55,7 @@ int					read_line(const int fd, char **tab, char **line, char **save)
 	}
 	if (*save)
 	{
+		ft_strdel(line);
 		*line = ft_strdup(*save);
 		ft_strdel(save);
 	}
@@ -101,6 +102,8 @@ int					get_next_line(const int fd, char **line)
 	int				x;
 
 	save = NULL;
+	if ((fd < 0 || line == NULL || read(fd, save, 0) < 0))
+		return (-1);
 	if (!*line)
 		*line = ft_strnew(BUFF_SIZE);
 	else
@@ -109,6 +112,7 @@ int					get_next_line(const int fd, char **line)
 	{
 		if (check_for_line(fd, tab, &save, tab[fd]) == -1)
 		{
+			ft_strdel(line);
 			*line = ft_strdup(save);
 			ft_strdel(&save);
 			return (1);
@@ -117,5 +121,5 @@ int					get_next_line(const int fd, char **line)
 	x = read_line(fd, tab, line, &save);
 	if (x > 0 || (x == 0 && *line[0]))
 		return (1);
-	return (0);
+	return (x);
 }
