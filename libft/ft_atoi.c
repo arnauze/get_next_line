@@ -1,32 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy_from_to.c                                :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amagnan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 12:05:09 by amagnan           #+#    #+#             */
-/*   Updated: 2018/10/19 12:05:09 by amagnan          ###   ########.fr       */
+/*   Created: 2018/09/11 12:16:28 by amagnan           #+#    #+#             */
+/*   Updated: 2018/09/11 12:16:29 by amagnan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strcpy_from_to(char *str, int a, int b)
+int		ft_atoi(const char *str)
 {
-	char		*new;
-	int			i;
+	unsigned int	i;
+	int				result;
+	int				sign;
 
 	i = 0;
-	new = ft_strnew(b - a + 1);
-	while (a <= b)
+	result = 0;
+	sign = 0;
+	while (str[i] == '\n' || str[i] == ' ' || str[i] == '\f' || str[i] == '\t'
+			|| str[i] == '\v' || str[i] == '\r')
+		i++;
+	if (str[i] == '-')
+		sign = 1;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		new[i] = str[a];
-		a++;
+		result *= 10;
+		result += str[i] - '0';
 		i++;
 	}
-	new[i] = '\0';
-	// ft_strdel(&str);
-	// new = ft_clean_str(new);
-	return (new);
+	if (sign == 1)
+		return (-result);
+	else
+		return (result);
 }

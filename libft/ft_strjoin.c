@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy_from_to.c                                :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amagnan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 12:05:09 by amagnan           #+#    #+#             */
-/*   Updated: 2018/10/19 12:05:09 by amagnan          ###   ########.fr       */
+/*   Created: 2018/09/11 14:01:36 by amagnan           #+#    #+#             */
+/*   Updated: 2018/09/11 14:01:37 by amagnan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strcpy_from_to(char *str, int a, int b)
+char		*ft_strjoin(char const *s1, char const *s2)
 {
-	char		*new;
-	int			i;
+	char	*tmp;
+	size_t	i;
+	size_t	j;
 
+	tmp = (char *)malloc(sizeof(char) * ft_strlen(s1) + ft_strlen(s2) + 1);
 	i = 0;
-	new = ft_strnew(b - a + 1);
-	while (a <= b)
+	j = 0;
+	if (!tmp)
+		return (NULL);
+	while (s1[i])
 	{
-		new[i] = str[a];
-		a++;
+		tmp[i] = s1[i];
 		i++;
 	}
-	new[i] = '\0';
-	// ft_strdel(&str);
-	// new = ft_clean_str(new);
-	return (new);
+	while (s2[j])
+	{
+		tmp[i + j] = s2[j];
+		j++;
+	}
+	tmp[i + j] = '\0';
+	return (tmp);
 }

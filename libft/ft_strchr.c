@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy_from_to.c                                :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amagnan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 12:05:09 by amagnan           #+#    #+#             */
-/*   Updated: 2018/10/19 12:05:09 by amagnan          ###   ########.fr       */
+/*   Created: 2018/09/11 16:17:25 by amagnan           #+#    #+#             */
+/*   Updated: 2018/09/11 16:17:26 by amagnan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strcpy_from_to(char *str, int a, int b)
+char	*ft_strchr(const char *s, int c)
 {
-	char		*new;
-	int			i;
-
-	i = 0;
-	new = ft_strnew(b - a + 1);
-	while (a <= b)
+	while (*s)
 	{
-		new[i] = str[a];
-		a++;
-		i++;
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
 	}
-	new[i] = '\0';
-	// ft_strdel(&str);
-	// new = ft_clean_str(new);
-	return (new);
+	if (*s == (char)c)
+		return ((char *)s);
+	else
+		return (NULL);
 }

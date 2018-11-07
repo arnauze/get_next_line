@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy_from_to.c                                :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amagnan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 12:05:09 by amagnan           #+#    #+#             */
-/*   Updated: 2018/10/19 12:05:09 by amagnan          ###   ########.fr       */
+/*   Created: 2018/09/11 16:18:45 by amagnan           #+#    #+#             */
+/*   Updated: 2018/09/11 16:18:45 by amagnan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strcpy_from_to(char *str, int a, int b)
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	char		*new;
-	int			i;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	new = ft_strnew(b - a + 1);
-	while (a <= b)
-	{
-		new[i] = str[a];
-		a++;
+	j = 0;
+	while (s1[i] != '\0')
 		i++;
+	while (s2[j] != '\0' && j < n)
+	{
+		s1[i + j] = s2[j];
+		j++;
 	}
-	new[i] = '\0';
-	// ft_strdel(&str);
-	// new = ft_clean_str(new);
-	return (new);
+	s1[i + j] = '\0';
+	return (s1);
 }

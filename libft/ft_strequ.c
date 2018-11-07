@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy_from_to.c                                :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amagnan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 12:05:09 by amagnan           #+#    #+#             */
-/*   Updated: 2018/10/19 12:05:09 by amagnan          ###   ########.fr       */
+/*   Created: 2018/09/11 13:40:17 by amagnan           #+#    #+#             */
+/*   Updated: 2018/09/11 13:40:21 by amagnan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strcpy_from_to(char *str, int a, int b)
+int			ft_strequ(char const *s1, char const *s2)
 {
-	char		*new;
-	int			i;
+	int		i;
 
 	i = 0;
-	new = ft_strnew(b - a + 1);
-	while (a <= b)
+	if (!s1 || !s2)
+		return (0);
+	if (s1 == NULL && s2 == NULL)
+		return (1);
+	while (s1[i] && s2[i])
 	{
-		new[i] = str[a];
-		a++;
+		if (s1[i] != s2[i])
+			return (0);
 		i++;
 	}
-	new[i] = '\0';
-	// ft_strdel(&str);
-	// new = ft_clean_str(new);
-	return (new);
+	return (1);
 }

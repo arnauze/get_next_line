@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy_from_to.c                                :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amagnan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 12:05:09 by amagnan           #+#    #+#             */
-/*   Updated: 2018/10/19 12:05:09 by amagnan          ###   ########.fr       */
+/*   Created: 2018/09/11 13:29:31 by amagnan           #+#    #+#             */
+/*   Updated: 2018/09/11 13:29:32 by amagnan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strcpy_from_to(char *str, int a, int b)
+char		*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char		*new;
-	int			i;
+	char	*tmp;
+	size_t	i;
 
+	if (!s || !f)
+		return (NULL);
+	tmp = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
 	i = 0;
-	new = ft_strnew(b - a + 1);
-	while (a <= b)
+	if (tmp)
 	{
-		new[i] = str[a];
-		a++;
-		i++;
+		while (s[i])
+		{
+			tmp[i] = f(i, s[i]);
+			i++;
+		}
+		tmp[i] = '\0';
+		return (tmp);
 	}
-	new[i] = '\0';
-	// ft_strdel(&str);
-	// new = ft_clean_str(new);
-	return (new);
+	return (NULL);
 }

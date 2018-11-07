@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy_from_to.c                                :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amagnan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 12:05:09 by amagnan           #+#    #+#             */
-/*   Updated: 2018/10/19 12:05:09 by amagnan          ###   ########.fr       */
+/*   Created: 2018/09/11 12:44:05 by amagnan           #+#    #+#             */
+/*   Updated: 2018/09/11 12:44:06 by amagnan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strcpy_from_to(char *str, int a, int b)
+void		*ft_memalloc(size_t size)
 {
-	char		*new;
-	int			i;
+	void	*tmp;
 
-	i = 0;
-	new = ft_strnew(b - a + 1);
-	while (a <= b)
-	{
-		new[i] = str[a];
-		a++;
-		i++;
-	}
-	new[i] = '\0';
-	// ft_strdel(&str);
-	// new = ft_clean_str(new);
-	return (new);
+	tmp = (void *)malloc(size);
+	if (!tmp)
+		return (NULL);
+	ft_bzero(tmp, size);
+	return (tmp);
 }

@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy_from_to.c                                :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amagnan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 12:05:09 by amagnan           #+#    #+#             */
-/*   Updated: 2018/10/19 12:05:09 by amagnan          ###   ########.fr       */
+/*   Created: 2018/09/11 13:51:20 by amagnan           #+#    #+#             */
+/*   Updated: 2018/09/11 13:51:22 by amagnan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strcpy_from_to(char *str, int a, int b)
+char		*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	char		*new;
-	int			i;
+	char	*tmp;
+	size_t	i;
+	int		x;
 
 	i = 0;
-	new = ft_strnew(b - a + 1);
-	while (a <= b)
+	x = start;
+	if (!s)
+		return (NULL);
+	tmp = (char *)malloc(sizeof(char) * len + 1);
+	if (!tmp)
+		return (NULL);
+	while (s[x] && i < len)
 	{
-		new[i] = str[a];
-		a++;
+		tmp[i] = s[x];
 		i++;
+		x++;
 	}
-	new[i] = '\0';
-	// ft_strdel(&str);
-	// new = ft_clean_str(new);
-	return (new);
+	tmp[i] = '\0';
+	return (tmp);
 }

@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy_from_to.c                                :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amagnan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 12:05:09 by amagnan           #+#    #+#             */
-/*   Updated: 2018/10/19 12:05:09 by amagnan          ###   ########.fr       */
+/*   Created: 2018/09/11 16:15:18 by amagnan           #+#    #+#             */
+/*   Updated: 2018/09/11 16:15:19 by amagnan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strcpy_from_to(char *str, int a, int b)
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char		*new;
-	int			i;
+	char	*string1;
+	char	*string2;
+	size_t	i;
 
 	i = 0;
-	new = ft_strnew(b - a + 1);
-	while (a <= b)
+	string1 = (char *)s1;
+	string2 = (char *)s2;
+	if (n == 0)
+		return (0);
+	while (i < n)
 	{
-		new[i] = str[a];
-		a++;
-		i++;
+		if (string1[i] == string2[i])
+			i++;
+		else
+			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
 	}
-	new[i] = '\0';
-	// ft_strdel(&str);
-	// new = ft_clean_str(new);
-	return (new);
+	return (0);
 }
