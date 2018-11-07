@@ -16,7 +16,7 @@ int					read_until_line(const int fd, char **tab, char **save, char *str)
 {
 	char			*tmp;
 	char			*new;
-	int				i;
+	size_t			i;
 
 	i = 0;
 	(tab[fd]) ? ft_strdel(&tab[fd]) : 0;
@@ -45,10 +45,13 @@ int					read_line(const int fd, char **tab, char **line, char **save)
 {
 	int				x;
 	char			buf[BUFF_SIZE + 1];
+	int				i;
 
+	i = 0;
 	while ((x = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[x] = '\0';
+		i = x;
 		if (read_until_line(fd, tab, save, buf) == -1)
 			break ;
 		ft_bzero(buf, BUFF_SIZE + 1);
@@ -59,13 +62,16 @@ int					read_line(const int fd, char **tab, char **line, char **save)
 		*line = ft_strdup(*save);
 		ft_strdel(save);
 	}
-	return (x);
+	if (i == 0)
+		return (x);
+	else
+		return (i);
 }
 
 int					check_for_line(const int fd, char **tab, char **save, char *str)
 {
 	char			*tmp;
-	int				i;
+	size_t			i;
 
 	tmp = ft_strdup(str);
 	ft_strdel(&str);

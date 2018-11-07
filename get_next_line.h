@@ -6,7 +6,7 @@
 /*   By: amagnan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 20:49:35 by amagnan           #+#    #+#             */
-/*   Updated: 2018/10/25 20:49:36 by amagnan          ###   ########.fr       */
+/*   Updated: 2018/11/06 18:56:23 by amagnan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 
-# define BUFF_SIZE 42
+# define BUFF_SIZE 99999
 
 int					get_next_line(const int fd, char **line);
 int					read_until_line(const int fd, char **tab,
