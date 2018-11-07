@@ -20,10 +20,6 @@ char		*ft_strnew(size_t size)
 	i = 0;
 	if (!(tmp = (char *)malloc(sizeof(char) * size + 1)))
 		return (NULL);
-	while (tmp[i])
-	{
-		tmp[i] = '\0';
-		i++;
-	}
+	ft_bzero(tmp, size + 1);
 	return (tmp);
 }

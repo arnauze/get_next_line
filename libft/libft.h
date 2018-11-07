@@ -16,13 +16,10 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <fcntl.h>
-# include <stdlib.h>
 
 # include <stdarg.h>
 # include <stdint.h>
 
-# define BUFF_SIZE 42
 int					g_glob;
 
 typedef struct		s_list
@@ -97,15 +94,15 @@ char				*ft_itoa_base_long(uint32_t value, int base,
 int					b_printf(char *format, ...);
 int					ft_str_is_print(char *str);
 char				*ft_strndup(const char *s, int n);
-char				*ft_strrevdup(const char *str);
+char				*ft_strrevdup(char *str);
 void				ft_strswap(char **str1, char **str2);
 char				*ft_strcat_from(char *str1, char *str2, int i);
 char				*ft_strndup_from(char *str, int a, int b);
 char				*ft_strcpy_from_to(char *str, int a, int b);
 char				*ft_strdup_from(char *str, int a);
-int 				ft_is_operation(char c);
+int					ft_is_operation(char c);
 void				*ft_realloc(void *ptr, size_t size);
 char				*ft_clean_str(char *str);
-int					get_next_line(const int fd, char **line);
+void				ft_mapdel(char **map);
 
 #endif

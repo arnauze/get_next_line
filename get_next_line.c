@@ -12,7 +12,8 @@
 
 #include "get_next_line.h"
 
-int					read_until_line(const int fd, char **tab, char **save, char *str)
+int					read_until_line(const int fd, char **tab,
+	char **save, char *str)
 {
 	char			*tmp;
 	char			*new;
@@ -41,7 +42,8 @@ int					read_until_line(const int fd, char **tab, char **save, char *str)
 	return (1);
 }
 
-int					read_line(const int fd, char **tab, char **line, char **save)
+int					read_line(const int fd, char **tab,
+	char **line, char **save)
 {
 	int				x;
 	char			buf[BUFF_SIZE + 1];
@@ -68,7 +70,27 @@ int					read_line(const int fd, char **tab, char **line, char **save)
 		return (i);
 }
 
-int					check_for_line(const int fd, char **tab, char **save, char *str)
+void				help(char *tmp, int fd, char **tab, char **save)
+{
+	int				i;
+
+	i = 0;
+	while (tmp[i] && tmp[i] != '\n')
+		i++;
+	*save = ft_strsub(tmp, 0, i);
+	i++;
+	if (tmp[i] && i < ft_strlen(tmp))
+	{
+		tab[fd] = ft_strsub(tmp, i, ft_strlen(tmp));
+		ft_strdel(&tmp);
+		return ;
+	}
+	tab[fd] = ft_strdup("");
+	ft_strdel(&tmp);
+}
+
+int					check_for_line(const int fd, char **tab,
+	char **save, char *str)
 {
 	char			*tmp;
 	size_t			i;
@@ -84,19 +106,7 @@ int					check_for_line(const int fd, char **tab, char **save, char *str)
 	}
 	else
 	{
-		i = 0;
-		while (tmp[i] && tmp[i] != '\n')
-			i++;
-		*save = ft_strsub(tmp, 0, i);
-		i++;
-		if (tmp[i] && i < ft_strlen(tmp))
-		{
-			tab[fd] = ft_strsub(tmp, i, ft_strlen(tmp));
-			ft_strdel(&tmp);
-			return (-1);
-		}
-		tab[fd] = ft_strdup("");
-		ft_strdel(&tmp);
+		help(tmp, fd, tab, save);
 		return (1);
 	}
 }

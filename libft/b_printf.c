@@ -12,11 +12,11 @@
 
 #include "libft.h"
 
-static void	helper_function1(va_list ap, char str)
+static void			helper_function1(va_list ap, char str)
 {
-	char	*s;
-	int		d;
-	char	c;
+	char			*s;
+	int				d;
+	char			c;
 
 	if (str == 's')
 	{
@@ -38,7 +38,7 @@ static void	helper_function1(va_list ap, char str)
 	}
 }
 
-static void	helper_function2(va_list ap, char str)
+static void			helper_function2(va_list ap, char str)
 {
 	int				o;
 	unsigned int	u;
@@ -67,10 +67,10 @@ static void	helper_function2(va_list ap, char str)
 	}
 }
 
-int		b_printf(char *format, ...)
+int					b_printf(char *format, ...)
 {
-	va_list		ap;
-	int			i;
+	va_list			ap;
+	int				i;
 
 	i = 0;
 	va_start(ap, format);

@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_mapdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amagnan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/11 16:18:03 by amagnan           #+#    #+#             */
-/*   Updated: 2018/09/11 16:18:04 by amagnan          ###   ########.fr       */
+/*   Created: 2018/10/24 16:01:37 by amagnan           #+#    #+#             */
+/*   Updated: 2018/10/24 16:01:38 by amagnan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strdup(const char *s1)
+void			ft_mapdel(char **map)
 {
-	char	*tmp;
-	size_t	i;
+	int			i;
 
-	i = 0;
-	tmp = ft_strnew(ft_strlen(s1));
-	if (!tmp)
-		return (NULL);
-	while (s1[i])
+	i = -1;
+	if (map)
 	{
-		tmp[i] = s1[i];
-		i++;
+		while (map[++i])
+		{
+			free(map[i]);
+			map[i] = NULL;
+		}
+		free(map);
+		map = NULL;
 	}
-	tmp[i] = '\0';
-	return (tmp);
 }

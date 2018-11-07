@@ -71,7 +71,6 @@ SOURCES = ft_atoi.c\
 		  ft_isoperation.c\
 		  ft_realloc.c\
 		  ft_clean_str.c\
-		  get_next_line.c\
 
 
 FLAGS = -Wall -Werror -Wextra -g

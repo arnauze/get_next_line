@@ -26,7 +26,5 @@ char			*ft_strcpy_from_to(char *str, int a, int b)
 		i++;
 	}
 	new[i] = '\0';
-	// ft_strdel(&str);
-	// new = ft_clean_str(new);
 	return (new);
 }
