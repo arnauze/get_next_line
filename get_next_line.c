@@ -5,137 +5,66 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amagnan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/25 20:49:16 by amagnan           #+#    #+#             */
-/*   Updated: 2018/10/25 20:49:17 by amagnan          ###   ########.fr       */
+/*   Created: 2018/11/10 12:57:17 by amagnan           #+#    #+#             */
+/*   Updated: 2018/11/10 12:57:18 by amagnan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int					read_until_line(const int fd, char **tab,
-	char **save, char *str)
+static int			get_first_part(char **line, char *str)
 {
-	char			*tmp;
-	char			*new;
-	size_t			i;
-
-	i = 0;
-	(tab[fd]) ? ft_strdel(&tab[fd]) : 0;
-	if (*save)
-	{
-		new = ft_strdup(*save);
-		ft_strdel(save);
-	}
-	else
-		new = ft_strdup("");
-	while (str[i] && str[i] != '\n')
-		i++;
-	tmp = ft_strsub(str, 0, i);
-	*save = ft_strjoin(new, tmp);
-	ft_strdel(&new);
-	ft_strdel(&tmp);
-	if (i < ft_strlen(str) - 1)
-	{
-		tab[fd] = ft_strsub(str, i + 1, ft_strlen(str));
-		return (-1);
-	}
-	return (1);
-}
-
-int					read_line(const int fd, char **tab,
-	char **line, char **save)
-{
-	int				x;
-	char			buf[BUFF_SIZE + 1];
 	int				i;
 
-	i = 0;
-	while ((x = read(fd, buf, BUFF_SIZE)) > 0)
-	{
-		buf[x] = '\0';
-		i = x;
-		if (read_until_line(fd, tab, save, buf) == -1)
+	i = -1;
+	while (str[++i])
+		if (str[i] == '\n')
 			break ;
-		ft_bzero(buf, BUFF_SIZE + 1);
-	}
-	if (*save)
-	{
-		ft_strdel(line);
-		*line = ft_strdup(*save);
-		ft_strdel(save);
-	}
-	if (i == 0)
-		return (x);
-	else
-		return (i);
+	*line = ft_strsub(str, 0, (size_t)i);
+	return (i);
 }
 
-void				help(char *tmp, int fd, char **tab, char **save)
+static char			*get_other_part(char *str1, int i)
 {
-	int				i;
+	char			*new;
+	int				j;
 
-	i = 0;
-	while (tmp[i] && tmp[i] != '\n')
-		i++;
-	*save = ft_strsub(tmp, 0, i);
-	i++;
-	if (tmp[i] && i < ft_strlen(tmp))
+	j = 0;
+	new = ft_strnew((int)ft_strlen(str1) - i);
+	while (str1[i + j])
 	{
-		tab[fd] = ft_strsub(tmp, i, ft_strlen(tmp));
-		ft_strdel(&tmp);
-		return ;
+		new[j] = str1[i + j];
+		j++;
 	}
-	tab[fd] = ft_strdup("");
-	ft_strdel(&tmp);
-}
-
-int					check_for_line(const int fd, char **tab,
-	char **save, char *str)
-{
-	char			*tmp;
-	size_t			i;
-
-	tmp = ft_strdup(str);
-	ft_strdel(&str);
-	if (tmp[0] == '\n')
-	{
-		*save = ft_strdup("");
-		tab[fd] = ft_strsub(tmp, 1, ft_strlen(tmp));
-		ft_strdel(&tmp);
-		return (-1);
-	}
-	else
-	{
-		help(tmp, fd, tab, save);
-		return (1);
-	}
+	new[j] = '\0';
+	ft_strdel(&str1);
+	return (new);
 }
 
 int					get_next_line(const int fd, char **line)
 {
 	static char		*tab[4864];
-	char			*save;
+	char			*tmp;
+	char			buf[BUFF_SIZE + 1];
 	int				x;
+	int				y;
 
-	save = NULL;
-	if ((fd < 0 || line == NULL || read(fd, save, 0) < 0))
+	if (fd < 0 || !line || read(fd, buf, 0) < 0)
 		return (-1);
-	if (!*line)
-		*line = ft_strnew(BUFF_SIZE);
-	else
-		ft_bzero(*line, ft_strlen(*line));
-	if (tab[fd])
+	(!tab[fd]) ? tab[fd] = ft_strnew(1) : 0;
+	while ((x = read(fd, buf, BUFF_SIZE)) > 0)
 	{
-		if (check_for_line(fd, tab, &save, tab[fd]) == -1)
-		{
-			ft_strdel(line);
-			*line = ft_strdup(save);
-			ft_strdel(&save);
-			return (1);
-		}
+		buf[x] = '\0';
+		tmp = ft_strjoin(tab[fd], buf);
+		free(tab[fd]);
+		tab[fd] = tmp;
+		if (ft_strchr(tab[fd], '\n'))
+			break ;
 	}
-	x = read_line(fd, tab, line, &save);
-	if (x > 0 || (x == 0 && *line[0]))
-		return (1);
-	return (x);
+	if (x < BUFF_SIZE && !ft_strlen(tab[fd]))
+		return (0);
+	y = get_first_part(line, tab[fd]);
+	(y < (int)ft_strlen(tab[fd])) ? tab[fd] =
+	get_other_part(tab[fd], y + 1) : ft_bzero(tab[fd], ft_strlen(tab[fd]));
+	return (1);
 }

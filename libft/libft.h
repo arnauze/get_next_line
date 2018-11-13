@@ -20,8 +20,6 @@
 # include <stdarg.h>
 # include <stdint.h>
 
-int					g_glob;
-
 typedef struct		s_list
 {
 	struct s_list	*next;
@@ -91,7 +89,6 @@ char				*ft_itoa_base(int64_t value, int base, const char *basetab);
 void				ft_putstr0x(char *str);
 char				*ft_itoa_base_long(uint32_t value, int base,
 	const char *basetab);
-int					b_printf(char *format, ...);
 int					ft_str_is_print(char *str);
 char				*ft_strndup(const char *s, int n);
 char				*ft_strrevdup(char *str);

@@ -1,7 +1,6 @@
 OBJECTS = *.o
 BINAIRE = run
 SOURCES = ft_atoi.c\
-		  b_printf.c\
 		  ft_bzero.c\
 		  ft_isalnum.c\
 		  ft_isalpha.c\

@@ -17,14 +17,8 @@
 # include <fcntl.h>
 # include <stdlib.h>
 
-# define BUFF_SIZE 99999
+# define BUFF_SIZE 9999
 
 int					get_next_line(const int fd, char **line);
-int					read_until_line(const int fd, char **tab,
-									char **save, char *str);
-int					read_line(const int fd, char **tab,
-									char **line, char **save);
-int					check_for_line(const int fd, char **tab,
-									char **save, char *str);
 
 #endif
